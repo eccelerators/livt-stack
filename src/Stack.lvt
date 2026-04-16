@@ -1,0 +1,57 @@
+namespace Livt.Collections
+
+component Stack
+{
+	const STACK_SIZE: int = 32
+
+	memory: logic[32, 8]
+
+	position: int
+
+	public fn Push(value: logic[8])
+	{
+		if (position < STACK_SIZE) {
+			memory[position] = value
+			position++
+		}
+	}
+
+	public fn Pop() logic[8]
+	{
+		if (position > 0) {
+			position--
+			return memory[position]
+		} else {
+			return 0b0000_0000
+		}
+	}
+
+	public fn Peek() logic[8]
+	{
+		if (position > 0) {
+			return memory[position - 1]
+		} else {
+			return 0b0000_0000
+		}
+	}
+
+	public fn IsEmpty() bool
+	{
+		return position == 0
+	}
+
+	public fn IsFull() bool
+	{
+		return position == STACK_SIZE
+	}
+
+	public fn GetPosition() int
+	{
+		return position
+	}
+
+	public fn Clear()
+	{
+		position = 0
+	}
+}
